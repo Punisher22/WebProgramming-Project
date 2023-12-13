@@ -127,6 +127,22 @@ const getRestaurantById = async (id) => {
   }
 };
 
+
+const searchRestaurantsByName = async (name) => {
+  try {
+    // Use a regular expression for case-insensitive partial search
+    const regex = new RegExp(name, 'i');
+
+    // Perform the search in the 'name' field of the Restaurant model
+    const filteredRestaurants = await Restaurant.find({ name: regex }).lean();
+
+    return filteredRestaurants;
+  } catch (error) {
+    console.error('Error in searchRestaurantsByName:', error);
+    throw error;
+  }
+}
+
 const updateRestaurantById = async (data, id) => {
   try {
     const updatedRestaurant = await Restaurant.findByIdAndUpdate(id, data, { new: true });
@@ -135,6 +151,8 @@ const updateRestaurantById = async (data, id) => {
     throw error;
   }
 };
+
+
 
 const deleteRestaurantById = async (id) => {
   try {
@@ -151,6 +169,7 @@ module.exports = {
   addNewRestaurant,
   getAllRestaurants,
   getRestaurantById,
+  searchRestaurantsByName,
   updateRestaurantById,
   deleteRestaurantById,
 };

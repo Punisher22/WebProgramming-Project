@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script rel="stylesheet" type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script rel="stylesheet" type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <title>Restaurant Homepage</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background color */
+            color: #fff; /* Text color */
+        }
+
+        header {
+            background-color: #424242; /* Dark Grey */
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #424242; /* Dark Grey */
+        }
+
+        .restaurant-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-section {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #263238; /* Dark Blue Grey */
+        }
+
+        .menu-item {
+            margin: 20px;
+            padding: 10px;
+            background-color: #455A64; /* Blue Grey */
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+         .image-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        /* Add some styles for the search box */
+        #searchContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #searchBox {
+            padding: 8px;
+            border: 1px solid #757575; /* Grey */
+            border-radius: 5px 0 0 5px;
+            background-color: #212121; /* Dark Grey */
+            color: #fff;
+        }
+
+        #searchButton {
+            padding: 8px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        /* Styles for the photo carousel */
+        #photoCarousel {
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .carousel-image {
+            width: 100%;
+            max-width: 430px;
+            border-radius: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .carousel-arrow.left {
+            left: 10px;
+        }
+
+        .carousel-arrow.right {
+            right: 10px;
+        }
+        .search-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Find Restaurants at your ease</h1>
+    </header>
+
+    <div class="hero-section">
+        <img src="../restaurant.jpeg" alt="Restaurant Image" class="restaurant-image">
+        <p>Delight your taste buds with our exquisite culinary offerings.</p>
+    </div>
+
+    <div class="menu-section">
+        <h2>Search your favourite cuisines</h2>
+        
+        <!-- Add the search box and button -->
+        <form id="searchForm" action="/api/restaurants" method="get">
+            <label for="searchBox">Search by Restaurant Name:</label>
+            <input type="text" id="searchBox" name="name" placeholder="Enter restaurant name">
+            <button type="submit" class="search-btn">Search</button>
+        </form>   
+    </div>
+    <div class="image-container">
+        <div><img src="../food1.jpeg" alt="Image 1" class="carousel-image"></div>
+        <div><img src="../food2.jpeg" alt="Image 2" class="carousel-image"></div>
+        <div><img src="../food3.jpeg" alt="Image 3" class="carousel-image"></div>
+        <!-- Add more images as needed -->
+    </div>
+</div>
+</body>
+</html>

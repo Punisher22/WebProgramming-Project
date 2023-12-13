@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Update Restaurant Data</title>
+    <style>
+        #outer {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 100% of the viewport height */
+            background-color: #f5f5f5; /* Light background color */
+        }
+       
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+           width: 300px; /* Set the width of the form */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+         .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <header>
+            <h1>Login</h1>
+        </header>
+        
+        <!-- User Login Form -->
+        <form id="loginForm" action="/api/login" method="post" onsubmit="loginAndRedirect(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+
+            <button type="submit">Login</button>
+            <div id="errorMessage" class="error-message"></div>
+        </form>
+         <script>
+        async function loginAndRedirect(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+             const errorMessageElement = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                });
+
+                if (response.ok) {
+                    // Redirect to the update page after successful login
+                    window.location.href = '/update';
+                } else {
+                    // Handle authentication failure
+                    errorMessageElement.textContent = 'Invalid username or password';
+                    console.error('Authentication failed');
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>

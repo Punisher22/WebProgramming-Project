@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Restaurant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5; /* Light background color */
+            color: #333; /* Text color */
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    {{!-- <form id="updateForm" action="/api/restaurant/:id" method="post" onsubmit="submitForm(event)"> --}}
+   <form id="updateForm" action="/api/restaurants/{{id}}" method="POST" onsubmit="submitForm(event)">
+        <h1>Update Restaurant</h1>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" value="{{id}}" required >
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{name}}" required>
+
+        <label for="borough">Borough:</label>
+        <input type="text" id="borough" name="borough" value="{{borough}}" required>
+
+        <label for="cuisine">Cuisine:</label>
+        <input type="text" id="cuisine" name="cuisine" value="{{cuisine}}" required>
+
+        <input type="hidden" name="_method" value="PUT">
+    <button type="submit">Update Restaurant</button>
+
+    </form>
+
+      <div id="successMessage" style="display: none; color: green; margin-top: 10px;">
+        Data updated successfully!
+    </div>
+    {{!-- <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const id = formData.get("id");
+
+            try {
+                const response = await fetch(`/api/restaurants/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                });
+
+                if (response.ok) {
+                    // Handle success, e.g., show a success message or redirect
+                    console.log("Update successful");
+                } else {
+                    // Handle error, e.g., display an error message
+                    console.error("Update failed:", response.status, await response.text());
+                }
+            } catch (error) {
+                console.error("Error during update:", error);
+            }
+        }
+    </script> --}}
+    <script>
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const id = formData.get("id");
+            const response = await fetch(`/api/restaurants/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            });
+
+            if (response.ok) {
+                 // Show the success message
+                document.getElementById('successMessage').style.display = 'block';
+ 
+                // Reset the form fields
+                form.reset();
+            } else {
+                // Handle error, e.g., display an error message
+                console.error("Update failed:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error during update:", error);
+        }
+    }
+</script>
+
+</body>
+</html>

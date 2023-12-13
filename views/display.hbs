@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #333; /* Dark background color */
+            color: #fff; /* Text color */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #555; /* Dark border color */
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff; /* Blue color */
+            color: #fff;
+        }
+
+        td table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td table th, td table td {
+            border: 1px solid #555; /* Dark border color */
+            padding: 8px;
+            text-align: left;
+        }
+
+        td table th {
+            background-color: #007bff; /* Blue color */
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Restaurant ID</th>
+        <th>Building</th>
+        <th>Coordinates</th>
+        <th>Grades</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each restaurants}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{restaurant_id}}</td>
+          <td>{{address.building}}</td>
+          <td>{{address.coord.[0]}}, {{address.coord.[1]}}</td>
+          <td>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Grade</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each grades}}
+                  <tr>
+                    <td>{{formatDate date}}</td>
+                    <td>{{grade}}</td>
+                    <td>{{score}}</td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+</body>
+</html>
